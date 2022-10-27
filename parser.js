@@ -53,7 +53,7 @@ class YMParser {
 			console.clear();
 			console.log( iterations, `Users parsed: ${this.usersListBoxElements.length}` );
 
-			if ( theSameHeightIterations > 0 ) {
+			if ( theSameHeightIterations == this.options.theSameHeightNum ) {
 				clearInterval( interval );
 
 				let usersElementsList = this.usersListBoxElements;
@@ -111,7 +111,8 @@ class YMParser {
 }
 
 const parser = new YMParser({
-	scrollDelay:           700,
+	scrollDelay:           1000,
+	theSameHeightNum:      3,
 
 	usersListBoxTag:       '._aano',
 	usersListScrollBoxTag: '._aano > div',
