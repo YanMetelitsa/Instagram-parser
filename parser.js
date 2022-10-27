@@ -23,6 +23,8 @@ class YMParser {
 
 		if ( window.confirm( 'Press OK to start parsing' ) ) {
 			this.getUsersList();
+		} else {
+			console.log( `YMParser stopped by user` );
 		}
 	}
 
@@ -55,7 +57,7 @@ class YMParser {
 			console.clear();
 			console.log( iterations, `Users parsed: ${this.usersListBoxElements.length}` );
 
-			if ( theSameHeightIterations == this.options.theSameHeightNum ) {
+			if ( theSameHeightIterations >= this.options.theSameHeightNum ) {
 				clearInterval( interval );
 
 				let usersElementsList = this.usersListBoxElements;
@@ -66,6 +68,10 @@ class YMParser {
 				console.log( `Scroll interval successfully stopped and got ${usersElementsList.length} users` );
 
 				this.showData();
+
+				if ( this.options.download ) {
+					this.downloadData();
+				}
 			}
 		}, this.options.scrollDelay );
 	}
@@ -74,13 +80,18 @@ class YMParser {
 	 * Push user data into main users array
 	 */
 	pushUserData ( userElement ) {
-		const username = userElement.querySelector( this.options.userNameTag ).innerHTML;
-		const link = userElement.querySelector( this.options.userLinkTag ).getAttribute( 'href' );
-
-		this.usersList.push({
-			username: username,
-			link: link,
+		let output = {
+			username: userElement.querySelector( this.options.userNameTag ).innerHTML,
+			link: userElement.querySelector( this.options.userLinkTag ).getAttribute( 'href' ),
+		};
+		
+		this.options.removeSymbols.forEach( symbol => {
+			Object.keys( output ).forEach( key => {
+				output[ key ] = output[ key ].replaceAll( symbol, '' );
+			});
 		});
+
+		this.usersList.push( output );
 	}
 
 	/**
@@ -101,6 +112,26 @@ class YMParser {
 	}
 
 	/**
+	 * Download data to txt file
+	 */
+	downloadData () {
+		const linkElement = document.createElement( 'a' );
+		const data = 'test';
+
+		linkElement.setAttribute( 'href', 'data:text/plain;charset=utf-8,' + encodeURIComponent( data ) );
+		linkElement.setAttribute( 'download', 'YMParser.txt' );
+
+		linkElement.style.display = 'none';
+		document.body.appendChild( linkElement );
+
+		linkElement.click();
+
+		document.body.removeChild( linkElement );
+
+		console.log( `File with parsed users downloaded` );
+	}
+
+	/**
 	 * Get height of users list scroll box
 	 */
 	get usersListScrollBoxHeight () {
@@ -117,7 +148,7 @@ class YMParser {
 
 const parser = new YMParser({
 	scrollDelay:           1000,
-	theSameHeightNum:      3,
+	theSameHeightNum:      1,
 
 	usersListBoxTag:       '._aano',
 	usersListScrollBoxTag: '._aano > div',
@@ -127,4 +158,8 @@ const parser = new YMParser({
 	userLinkTag:           'div > span > a',
 
 	checkLoadingTag:       '._aanq',
+
+	removeSymbols:         [ `'` ],
+
+	download:              true,
 });
