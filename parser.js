@@ -13,8 +13,10 @@ class YMParser {
 		};
 		this.usersList = [];
 
+		this.startTime = new Date();
+
 		console.clear();
-		console.log( `YM Parse v${YMParser.version} started with settings:` );
+		console.log( `YM Parser v${YMParser.version} started with settings:` );
 		console.table( args );
 
 		console.log( `Press OK in instagram window to start parsing` );
@@ -92,7 +94,10 @@ class YMParser {
 	 * Print users data
 	 */
 	showData () {
+		const parsingTime = Math.abs( new Date() - this.startTime ) / 1000;
+
 		console.table( this.usersList );
+		console.log( `Parsed ${this.usersList.length} users in ${parsingTime} seconds` );
 	}
 
 	/**
