@@ -5,9 +5,6 @@ class YMParser {
 	 * Create Parser
 	 */
 	constructor ( args ) {
-		console.log( `YM Parse v${YMParser.version} start with settings:` );
-		console.table( args );
-
 		this.options = args;
 
 		this.elements = {
@@ -16,7 +13,15 @@ class YMParser {
 		};
 		this.usersList = [];
 
-		this.getUsersList();
+		console.clear();
+		console.log( `YM Parse v${YMParser.version} started with settings:` );
+		console.table( args );
+
+		console.log( `Press OK in instagram window to start parsing` );
+
+		if ( window.confirm( 'Press OK to start parsing' ) ) {
+			this.getUsersList();
+		}
 	}
 
 	/**
@@ -29,6 +34,7 @@ class YMParser {
 		let theSameHeightIterations = 0;
 
 		console.log( `Scroll interval started. Please wait...` );
+
 		const interval = setInterval( () => {
 			if ( iterations % 2 == 0 ) {
 				if ( lastUsersListScrollBoxHeight == this.usersListScrollBoxHeight ) {
@@ -44,10 +50,13 @@ class YMParser {
 
 			iterations++;
 
+			console.clear();
+			console.log( iterations, `Users parsed: ${this.usersListBoxElements.length}` );
+
 			if ( theSameHeightIterations > 0 ) {
 				clearInterval( interval );
 
-				const usersElementsList = this.elements.usersListBox.querySelectorAll( this.options.userElementTag );
+				let usersElementsList = this.usersListBoxElements;
 				usersElementsList.forEach( userElement => {
 					this.pushUserData( userElement );
 				});
@@ -83,8 +92,7 @@ class YMParser {
 	 * Print users data
 	 */
 	showData () {
-		// console.table( this.usersList );
-		console.log( this.usersList[ 0 ] );
+		console.table( this.usersList );
 	}
 
 	/**
@@ -93,9 +101,17 @@ class YMParser {
 	get usersListScrollBoxHeight () {
 		return this.elements.usersListScrollBox.offsetHeight;
 	}
+
+	/**
+	 * Get elements from users list box
+	 */
+	get usersListBoxElements () {
+		return this.elements.usersListBox.querySelectorAll( this.options.userElementTag );
+	}
 }
-new YMParser({
-	scrollDelay:           1000,
+
+const parser = new YMParser({
+	scrollDelay:           700,
 
 	usersListBoxTag:       '._aano',
 	usersListScrollBoxTag: '._aano > div',
