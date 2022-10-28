@@ -2,7 +2,7 @@ const app = {
 	name:       'YMInstagramParser',
 	author:     'Yan Metelitsa',
 	authorLink: 'https://yanmet.com/',
-	version:    '1.0.0',
+	version:    '1.0.1',
 
 	style:      'background-color: #7C04FC; padding: 4px 8px;',
 };
