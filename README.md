@@ -28,18 +28,13 @@ Use this parser to collect a list of followers on instagram.
 | scrollDelay | Time before next scroll | `integer` | 1000 |
 | theSameHeightNum | After how many matches scroll height script stops | `integer` | 1 |
 | followersLimit | At what number of followers to stop the script | `integer` | Infinity |
-
 | followersListBoxTag | Tag name of followers list box element | `string` | ._aano |
 | followersListScrollBoxTag | Tag name of followers list box scroll element | `string` | ._aano > div |
-
 | followerElementTag | Tag name of follower element | `string` | [ aria-labelledby ] |
 | followerNameTag | Tag name of follower name element | `string` | div > span > a > span > div |
 | followerLinkTag | Tag name of follower link element | `string` | div > span > a |
-
 | checkLoadingTag | Tag name of loading element | `string` | ._aanq |
-
 | removeSymbols | Symbols to remove from all output data rows | `array (string)` | [] |
-
 | download | Is it necessary to download the data to a file | `boolean` | true |
 | fileName | Name of the file | `string` | followers |
 | fileExtension | Extension of the file | `string` | .txt |
