@@ -87,19 +87,20 @@ class YMInstagramParser {
 
 			iterations++;
 
-			const parsingTime = Math.abs( new Date() - this.startTime ) / 1000;
+			const followersLimit = this.options.followersLimit;
 			const followersParsed = this.followersListBoxElements.length;
+			const parsingTime = Math.abs( new Date() - this.startTime ) / 1000;
 
 			console.clear();
-			console.log( iterations, `Followers parsed: ${followersParsed} / ${this.options.followersLimit} in ${parsingTime} seconds` );
+			console.log( iterations, `Followers parsed: ${followersParsed} / ${followersLimit} in ${parsingTime} seconds` );
 
 			/** Check if scroll stopped */
-			if ( theSameHeightIterationsNum >= this.options.theSameHeightNum || this.options.followersLimit < followersParsed ) {
+			if ( ( theSameHeightIterationsNum >= this.options.theSameHeightNum && !isFinite( followersLimit ) ) || followersLimit < followersParsed ) {
 				clearInterval( interval );
 
 				/** Push data in main followers array */
 				this.followersListBoxElements.forEach( ( followerElement, index ) => {
-					if ( index <= this.options.followersLimit ) {
+					if ( index <= followersLimit ) {
 						this.pushFollowerData( followerElement );
 					} else {
 						return;
