@@ -1,4 +1,4 @@
-# Instagram followers parser YMParser
+# Instagram followers parser
 
 Use this parser to collect a list of followers on instagram.
 
@@ -23,25 +23,40 @@ Use this parser to collect a list of followers on instagram.
 
 # Settings
 
-| Option | Description | Type | Default |
-| --- | --- | --- | --- |
-| scrollDelay | Time before next scroll | `integer` | 1000 |
-| theSameHeightNum | After how many matches scroll height script stops | `integer` | 1 |
-| followersLimit | At what number of followers to stop the script | `integer` | Infinity |
-| followersListBoxTag | Tag name of followers list box element | `string` | ._aano |
-| followersListScrollBoxTag | Tag name of followers list box scroll element | `string` | ._aano > div |
-| followerElementTag | Tag name of follower element | `string` | [ aria-labelledby ] |
-| followerNameTag | Tag name of follower name element | `string` | div > span > a > span > div |
-| followerLinkTag | Tag name of follower link element | `string` | div > span > a |
-| checkLoadingTag | Tag name of loading element | `string` | ._aanq |
-| removeSymbols | Symbols to remove from all output data rows | `array (string)` | [] |
-| download | Is it necessary to download the data to a file | `boolean` | true |
-| fileName | Name of the file | `string` | followers |
-| fileExtension | Extension of the file | `string` | .txt |
-| outputFormat | Download file data format | `string` | {$username} https://instagram.com{$link}\n |
+| Option | Description | Type |
+| --- | --- | --- |
+| scrollDelay | Time before next scroll | `integer` |
+| theSameHeightNum | After how many matches scroll height script stops | `integer` |
+| followersLimit | At what number of followers to stop the script | `integer` |
+| followersListBoxTag | Tag name of followers list box element | `string` |
+| followersListScrollBoxTag | Tag name of followers list box scroll element | `string` |
+| followerElementTag | Tag name of follower element | `string` |
+| followerNameTag | Tag name of follower name element | `string` |
+| followerLinkTag | Tag name of follower link element | `string` |
+| checkLoadingTag | Tag name of loading element | `string` |
+| removeSymbols | Symbols to remove from all output data rows | `array (string)` |
+| download | Is it necessary to download the data to a file | `boolean` |
+| fileName | Name of the file | `string` |
+| fileExtension | Extension of the file | `string` |
+| outputFormat | Download file data format | `string` |
 
 # Output format
 
-`{$username}` - Follower username
-`{$link}` - Follower link slug
-`\n` - New line
+| Tag | Description |
+| --- | --- |
+| `{$username}` | Follower username |
+| `{$link}` | Follower link slug |
+| `\n` | New line |
+
+## Examples
+
+### Excel output
+
+Creates an excel file with two columns
+
+```javascript
+const settings = {
+  fileExtension: '.csv',
+  outputFormat:  `{$username};https://instagram.com{$link}\n`,
+};
+```
