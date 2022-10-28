@@ -24,6 +24,8 @@ const settings = {
 	removeSymbols:             [],
 
 	download:                  true,
+	fileName:                  'followers',
+	fileExtension:             '.txt',
 	outputFormat:              `{$username} https://instagram.com{$link}\n`,
 };
 
@@ -159,7 +161,7 @@ class YMInstagramParser {
 	 * @param {string} filename Name of the output file
 	 * @param {string} extension Extension of the output file
 	 */
-	downloadData ( filename = app.name, extension = 'txt' ) {
+	downloadData ( filename = this.options.fileName, extension = this.options.fileExtension ) {
 		/** Format data */
 		let data = ``;
 		this.followersList.forEach( follower => {
