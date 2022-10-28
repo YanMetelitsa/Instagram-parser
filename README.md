@@ -7,6 +7,7 @@ Use this parser to collect a list of followers on instagram.
 - Instagram followers username and links parsing
 - Download followers formatted data to file 
 - Simple and convenient work with console
+- Shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
 
 # Usage
 
@@ -19,7 +20,8 @@ Use this parser to collect a list of followers on instagram.
 7. Press <kbd>Enter</kbd>
 8. Press <kbd>Enter</kbd> again or click `OK` in alert from Instagram tab
 9. Wait while parser is working...
-10. Done! You got followers data
+10. You can use shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
+11. Done! You got followers data
 
 # Settings
 

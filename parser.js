@@ -5,6 +5,8 @@ const app = {
 	version:    '1.0.1',
 
 	style:      'background-color: #7C04FC; padding: 4px 8px;',
+
+	hardStop:   false,
 };
 
 const settings = {
@@ -95,12 +97,12 @@ class YMInstagramParser {
 			console.log( iterations, `Followers parsed: ${followersParsed} / ${followersLimit} in ${parsingTime} seconds` );
 
 			/** Check if scroll stopped */
-			if ( ( theSameHeightIterationsNum >= this.options.theSameHeightNum && !isFinite( followersLimit ) ) || followersLimit < followersParsed ) {
+			if ( app.hardStop || ( theSameHeightIterationsNum >= this.options.theSameHeightNum && !isFinite( followersLimit ) ) || followersLimit <= followersParsed ) {
 				clearInterval( interval );
 
 				/** Push data in main followers array */
 				this.followersListBoxElements.forEach( ( followerElement, index ) => {
-					if ( index <= followersLimit ) {
+					if ( index < followersLimit ) {
 						this.pushFollowerData( followerElement );
 					} else {
 						return;
@@ -116,6 +118,8 @@ class YMInstagramParser {
 				if ( this.options.download ) {
 					this.downloadData();
 				}
+
+				app.hardStop = false;
 			}
 		}, this.options.scrollDelay );
 	}
@@ -202,6 +206,13 @@ class YMInstagramParser {
 		return this.elements.followersListScrollBox.querySelectorAll( this.options.followerElementTag );
 	}
 }
+
+/** Hard stop */
+window.addEventListener( 'keydown', e => {
+	if ( e.ctrlKey && e.shiftKey && e.key == 'ArrowUp' ) {
+		app.hardStop = true;
+	}
+});
 
 /** Create parser and start */
 const parser = new YMInstagramParser( settings );
