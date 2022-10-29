@@ -14,7 +14,7 @@ Use this parser to collect a list of followers on instagram.
 1. Go to https://instagram.com/username/followers/
 2. Press <kbd>F12</kbd> to open browser development panel
 3. Open the `Console` tab
-4. Copy code from `parser.js`
+4. Copy code from [parser.js](parser.js)
 5. Insert code to command line in `Console`
 6. Enter the required settings or leave the default
 7. Press <kbd>Enter</kbd>
