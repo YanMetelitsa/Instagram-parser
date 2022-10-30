@@ -11,11 +11,13 @@ Use this parser to collect a list of followers or followings on instagram.
 
 ## Usage
 
-1. Go to https://instagram.com/username/followers/ or ../following/
-2. Press <kbd>F12</kbd> to open browser development panel
-3. Open the `Console` tab
-4. Copy code from [parser.js](parser.js)
-5. Insert code to command line in `Console`
+For best use, I recommend to enter the number of account followers instead of Infinity (`followersLimit` variable) and set `scrollDelay` to 500. This will exclude the possibility of pre-stopping the script.
+
+1. Copy code from [parser.js](parser.js)
+2. Go to https://instagram.com/username/followers/
+3. Press <kbd>F12</kbd> to open browser development panel
+4. Open the `Console` tab
+5. Paste the code to command line
 6. Enter the required settings or leave the default
 7. Press <kbd>Enter</kbd>
 8. Press <kbd>Enter</kbd> again or click `OK` in alert from Instagram tab
