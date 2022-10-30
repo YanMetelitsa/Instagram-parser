@@ -2,6 +2,7 @@ const app = {
 	name:       'YMInstagramParser',
 	author:     'Yan Metelitsa',
 	authorLink: 'https://yanmet.com/',
+	gitHubLink: 'https://github.com/YanMetelitsa/Instagram-parser',
 	version:    '1.0.1',
 
 	style:      'background-color: #7C04FC; padding: 4px 8px;',
@@ -51,6 +52,7 @@ class YMInstagramParser {
 		console.log( `%c${app.name} v${app.version}`, app.style, `started with settings:` );
 		console.table( params );
 		console.log( `%cDevelopment`, app.style, `${app.author} ${app.authorLink}` );
+		console.log( `%cGitHub`, app.style, app.gitHubLink );
 
 		console.log( `Click OK in the Instagram tab to start parsing` );
 
