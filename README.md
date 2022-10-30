@@ -2,19 +2,19 @@
 
 Use this parser to collect a list of followers on instagram.
 
-# Features
+## Features
 
 - Instagram followers username and links parsing
 - Download followers formatted data to file 
 - Simple and convenient work with console
 - Shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
 
-# Usage
+## Usage
 
 1. Go to https://instagram.com/username/followers/
 2. Press <kbd>F12</kbd> to open browser development panel
 3. Open the `Console` tab
-4. Copy code from `parser.js`
+4. Copy code from [parser.js](parser.js)
 5. Insert code to command line in `Console`
 6. Enter the required settings or leave the default
 7. Press <kbd>Enter</kbd>
@@ -23,7 +23,7 @@ Use this parser to collect a list of followers on instagram.
 10. You can use shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
 11. Done! You got followers data
 
-# Settings
+## Settings
 
 | Option | Description | Type |
 | --- | --- | --- |
@@ -42,7 +42,7 @@ Use this parser to collect a list of followers on instagram.
 | fileExtension | Extension of the file | `string` |
 | outputFormat | Download file data format | `string` |
 
-# Output format
+## Output format
 
 | Tag | Description |
 | --- | --- |
@@ -50,7 +50,7 @@ Use this parser to collect a list of followers on instagram.
 | `{$link}` | Follower link slug |
 | `\n` | New line |
 
-## Examples
+## Output examples
 
 ### Excel output
 
