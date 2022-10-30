@@ -11,18 +11,6 @@
 
 ## Использование
 
-1. Go to https://instagram.com/username/followers/ or ../following/
-2. Press <kbd>F12</kbd> to open browser development panel
-3. Open the `Console` tab
-4. Copy code from [parser.js](parser.js)
-5. Insert code to command line in `Console`
-6. Enter the required settings or leave the default
-7. Press <kbd>Enter</kbd>
-8. Press <kbd>Enter</kbd> again or click `OK` in alert from Instagram tab
-9. Wait while parser is working...
-10. You can use shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
-11. Done! You got followers data
-
 1. Перейдите на https://instagram.com/username/followers/ или ../following/
 2. Нажмите <kbd>F12</kbd> чтобы открыть панель разработчика
 3. Откройте вкладку `Консоль`
