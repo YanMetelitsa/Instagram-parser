@@ -2,6 +2,10 @@
 
 Use this parser to collect a list of followers or followings on instagram.
 
+## Other languages
+
+English - [Russian](README-ru.md)
+
 ## Features
 
 - Instagram followers username and links parsing
