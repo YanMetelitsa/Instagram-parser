@@ -1,6 +1,6 @@
 # Instagram followers parser
 
-Use this parser to collect a list of followers on instagram.
+Use this parser to collect a list of followers or followings on instagram.
 
 ## Features
 
@@ -11,7 +11,7 @@ Use this parser to collect a list of followers on instagram.
 
 ## Usage
 
-1. Go to https://instagram.com/username/followers/
+1. Go to https://instagram.com/username/followers/ or ../following/
 2. Press <kbd>F12</kbd> to open browser development panel
 3. Open the `Console` tab
 4. Copy code from [parser.js](parser.js)
