@@ -18,13 +18,13 @@ English - [Russian](README-ru.md)
 For best use, I recommend to enter the number of account followers instead of Infinity (`followersLimit` variable) and set `scrollDelay` to 500. This will exclude the possibility of pre-stopping the script.
 
 1. Copy code from [parser.js](parser.js)
-2. Go to https://instagram.com/username/followers/
+2. Go to https://instagram.com/username/followers/ or ../following/
 3. Press <kbd>F12</kbd> to open browser development panel
 4. Open the `Console` tab
 5. Paste the code to command line
 6. Enter the required settings or leave the default
 7. Press <kbd>Enter</kbd>
-8. Press <kbd>Enter</kbd> again or click `OK` in alert from Instagram tab
+8. Press <kbd>Enter</kbd> again or click `OK` in alert
 9. Wait while parser is working...
 10. You can use shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
 11. Done! You got followers data
@@ -48,7 +48,7 @@ For best use, I recommend to enter the number of account followers instead of In
 | fileExtension | Extension of the file | `string` |
 | outputFormat | Download file data format | `string` |
 
-## Output format
+## Output strings format
 
 | Tag | Description |
 | --- | --- |
