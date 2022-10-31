@@ -10,43 +10,23 @@ const app = {
 	hardStop:   false,
 };
 
-const settings = {
-	scrollDelay:               1000,
-	theSameHeightNum:          1,
-	followersLimit:            Infinity,
-
-	followersListBoxTag:       '._aano',
-	followersListScrollBoxTag: '._aano > div',
-
-	followerElementTag:        '[ aria-labelledby ]',
-	followerNameTag:           'div > span > a > span > div',
-	followerLinkTag:           'div > span > a',
-
-	checkLoadingTag:           '._aanq',
-
-	removeSymbols:             [],
-
-	download:                  true,
-	fileName:                  'followers',
-	fileExtension:             '.txt',
-	outputFormat:              `{$username} https://instagram.com{$link}\n`,
-};
-
 class YMInstagramParser {
-	/** Create Parser */
+	/**
+	 * Create Parser
+	 * 
+	 * @param {object} params Parser settings
+	 */
 	constructor ( params ) {
-		/** Get the start time of the script */
-		this.startTime = new Date();
-		
 		/** Load params in options */
 		this.options = params;
 
 		/** Get main script elements */
 		this.elements = {
-			followersListBox: document.querySelector( this.options.followersListBoxTag ),
-			followersListScrollBox: document.querySelector( this.options.followersListScrollBoxTag ),
+			usersListBox: document.querySelector( this.options.usersListBoxTag ),
+			usersListScrollBox: document.querySelector( this.options.usersListScrollBoxTag ),
+			loading: document.querySelector( this.options.loadingTag ),
 		};
-		this.followersList = [];
+		this.usersList = [];
 
 		console.clear();
 		console.log( `%c${app.name} v${app.version}`, app.style, `started with settings:` );
@@ -58,17 +38,20 @@ class YMInstagramParser {
 
 		/** Press OK to start */
 		if ( window.confirm( 'Click OK to start parsing' ) ) {
-			this.getFollowersList();
+			/** Get the start time of the script */
+			this.startTime = new Date();
+
+			this.getusersList();
 		} else {
 			console.warn( `${app.name} stopped by user` );
 		}
 	}
 
-	/** Get followers list */
-	getFollowersList () {
+	/** Get users list */
+	getusersList () {
 		let iterations = 0;
 
-		let lastFollowersListScrollBoxHeight = 0;
+		let lastusersListScrollBoxHeight = 0;
 		let theSameHeightIterationsNum = 0;
 
 		console.log( `Scroll interval started. Please wait...` );
@@ -77,41 +60,41 @@ class YMInstagramParser {
 		const interval = setInterval( () => {
 			/** Check every 2 times if last scroll box had the same height with current */
 			if ( iterations % 2 == 0 ) {
-				if ( lastFollowersListScrollBoxHeight == this.followersListScrollBoxHeight ) {
+				if ( lastusersListScrollBoxHeight == this.usersListScrollBoxHeight ) {
 					theSameHeightIterationsNum++;
 				} else {
 					theSameHeightIterationsNum = 0;
 				}
 
-				lastFollowersListScrollBoxHeight = this.followersListScrollBoxHeight;
+				lastusersListScrollBoxHeight = this.usersListScrollBoxHeight;
 			}
 
 			/** Scroll */
-			this.followersListScroll();
+			this.usersListScroll();
 
 			iterations++;
 
-			const followersLimit = this.options.followersLimit;
-			const followersParsed = this.followersListBoxElements.length;
+			const usersLimit = this.options.usersLimit;
+			const usersParsed = this.usersListBoxElements.length;
 			const parsingTime = Math.abs( new Date() - this.startTime ) / 1000;
 
 			console.clear();
-			console.log( iterations, `Followers parsed: ${followersParsed} / ${followersLimit} in ${parsingTime} seconds` );
+			console.log( iterations, `users parsed: ${usersParsed} / ${usersLimit} in ${parsingTime} seconds` );
 
 			/** Check if scroll stopped */
-			if ( app.hardStop || ( theSameHeightIterationsNum >= this.options.theSameHeightNum && !isFinite( followersLimit ) ) || followersLimit <= followersParsed ) {
+			if ( app.hardStop || ( theSameHeightIterationsNum >= this.options.theSameHeightNum && !isFinite( usersLimit ) ) || usersLimit <= usersParsed ) {
 				clearInterval( interval );
 
-				/** Push data in main followers array */
-				this.followersListBoxElements.forEach( ( followerElement, index ) => {
-					if ( index < followersLimit ) {
-						this.pushFollowerData( followerElement );
+				/** Push data in main users array */
+				this.usersListBoxElements.forEach( ( userElement, index ) => {
+					if ( index < usersLimit ) {
+						this.pushUserData( userElement );
 					} else {
 						return;
 					}
 				});
 
-				console.log( `Scroll interval successfully stopped and got ${followersParsed} followers` );
+				console.log( `Scroll interval successfully stopped and got ${usersParsed} users` );
 
 				/** Show data */
 				this.showData();
@@ -126,21 +109,21 @@ class YMInstagramParser {
 		}, this.options.scrollDelay );
 	}
 
-	/**  Scroll followers list */
-	followersListScroll () {
-		this.elements.followersListBox.scroll( 0, this.followersListScrollBoxHeight );
+	/**  Scroll users list */
+	usersListScroll () {
+		this.elements.usersListBox.scroll( 0, this.usersListScrollBoxHeight );
 	}
 
 	/**
-	 * Push follower data in main followers array
+	 * Push user data in main users array
 	 * 
-	 * @param {Element} followerElement Followers list element
+	 * @param {Element} userElement User list element
 	 */
-	pushFollowerData ( followerElement ) {
+	pushUserData ( userElement ) {
 		/** Get data */
 		let output = {
-			username: followerElement.querySelector( this.options.followerNameTag ).innerText,
-			link:     followerElement.querySelector( this.options.followerLinkTag ).getAttribute( 'href' ),
+			username: userElement.querySelector( this.options.userNameTag ).innerText,
+			link:     userElement.querySelector( this.options.userLinkTag ).getAttribute( 'href' ),
 		};
 		
 		/** Remove symbols from output */
@@ -150,16 +133,17 @@ class YMInstagramParser {
 			});
 		});
 
-		this.followersList.push( output );
+		/** Push */
+		this.usersList.push( output );
 	}
 
-	/** Print followers data */
+	/** Print users data */
 	showData () {
 		const parsingTime = Math.abs( new Date() - this.startTime ) / 1000;
 
 		console.clear();
-		console.table( this.followersList );
-		console.log( `Parsed ${this.followersList.length} followers in ${parsingTime} seconds` );
+		console.table( this.usersList );
+		console.log( `Parsed ${this.usersList.length} users in ${parsingTime} seconds` );
 	}
 
 	/**
@@ -171,10 +155,10 @@ class YMInstagramParser {
 	downloadData ( filename = this.options.fileName, extension = this.options.fileExtension ) {
 		/** Format data */
 		let data = ``;
-		this.followersList.forEach( follower => {
+		this.usersList.forEach( user => {
 			const tags = {
-				'{$username}': follower.username,
-				'{$link}':     follower.link,
+				'{$username}': user.username,
+				'{$link}':     user.link,
 			};
 
 			let row = this.options.outputFormat;
@@ -195,17 +179,17 @@ class YMInstagramParser {
 		linkElement.click();
 		document.body.removeChild( linkElement );
 
-		console.log( `File with parsed followers downloaded` );
+		console.log( `File with parsed users downloaded` );
 	}
 
-	/** Get height of followers list scroll box */
-	get followersListScrollBoxHeight () {
-		return this.elements.followersListScrollBox.offsetHeight;
+	/** Get height of users list scroll box */
+	get usersListScrollBoxHeight () {
+		return this.elements.usersListScrollBox.offsetHeight;
 	}
 
-	/**  Get elements from followers list box */
-	get followersListBoxElements () {
-		return this.elements.followersListScrollBox.querySelectorAll( this.options.followerElementTag );
+	/**  Get elements from users list box */
+	get usersListBoxElements () {
+		return this.elements.usersListScrollBox.querySelectorAll( this.options.userElementTag );
 	}
 }
 
@@ -217,4 +201,24 @@ window.addEventListener( 'keydown', e => {
 });
 
 /** Create parser and start */
-const parser = new YMInstagramParser( settings );
+const parser = new YMInstagramParser({
+	scrollDelay:               1000,
+	theSameHeightNum:          1,
+	usersLimit:                Infinity,
+
+	usersListBoxTag:           '._aano',
+	usersListScrollBoxTag:     '._aano > div',
+
+	userElementTag:            '[ aria-labelledby ]',
+	userNameTag:               'div > span > a > span > div',
+	userLinkTag:               'div > span > a',
+
+	loadingTag:                '._aanq',
+
+	removeSymbols:             [ /* 'a', 'v', `'` */ ],
+
+	download:                  true,
+	fileName:                  'users',
+	fileExtension:             '.txt',
+	outputFormat:              `{$username} https://instagram.com{$link}\n`,
+});

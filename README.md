@@ -8,14 +8,14 @@ English - [Russian](README-ru.md)
 
 ## Features
 
-- Instagram followers username and links parsing
-- Download followers formatted data to file 
+- Instagram users username and links parsing
+- Download users formatted data to file 
 - Simple and convenient work with console
 - Shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
 
 ## Usage
 
-For best use, I recommend to enter the number of account followers instead of Infinity (`followersLimit` variable) and set `scrollDelay` to 500. This will exclude the possibility of pre-stopping the script.
+For best use, I recommend to enter the number of users accounts instead of Infinity (`usersLimit` variable) and set `scrollDelay` to 500. This will exclude the possibility of pre-stopping the script.
 
 1. Copy code from [parser.js](parser.js)
 2. Go to https://instagram.com/username/followers/ or ../following/
@@ -27,7 +27,7 @@ For best use, I recommend to enter the number of account followers instead of In
 8. Press <kbd>Enter</kbd> again or click `OK` in alert
 9. Wait while parser is working...
 10. You can use shortcut key <kbd>Crtl</kbd> + <kbd>Shift</kbd> + <kbd>Up</kbd> to stop parsing
-11. Done! You got followers data
+11. Done! You got users data
 
 ## Settings
 
@@ -35,12 +35,12 @@ For best use, I recommend to enter the number of account followers instead of In
 | --- | --- | --- |
 | scrollDelay | Time before next scroll | `integer` |
 | theSameHeightNum | After how many matches scroll height script stops | `integer` |
-| followersLimit | At what number of followers to stop the script | `integer` |
-| followersListBoxTag | Tag name of followers list box element | `string` |
-| followersListScrollBoxTag | Tag name of followers list box scroll element | `string` |
-| followerElementTag | Tag name of follower element | `string` |
-| followerNameTag | Tag name of follower name element | `string` |
-| followerLinkTag | Tag name of follower link element | `string` |
+| usersLimit | At what number of users to stop the script | `integer` |
+| usersListBoxTag | Tag name of users list box element | `string` |
+| usersListScrollBoxTag | Tag name of users list box scroll element | `string` |
+| userElementTag | Tag name of user element | `string` |
+| userNameTag | Tag name of user name element | `string` |
+| userLinkTag | Tag name of user link element | `string` |
 | checkLoadingTag | Tag name of loading element | `string` |
 | removeSymbols | Symbols to remove from all output data rows | `array (string)` |
 | download | Is it necessary to download the data to a file | `boolean` |
@@ -52,8 +52,8 @@ For best use, I recommend to enter the number of account followers instead of In
 
 | Tag | Description |
 | --- | --- |
-| `{$username}` | Follower username |
-| `{$link}` | Follower link slug |
+| `{$username}` | User username |
+| `{$link}` | User link slug |
 | `\n` | New line |
 
 ## Output examples
