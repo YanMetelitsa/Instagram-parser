@@ -122,9 +122,15 @@ class YMInstagramParser {
 	pushUserData ( userElement ) {
 		/** Get data */
 		let output = {
-			username: userElement.querySelector( this.options.userNameTag ).innerText,
+			username: userElement.querySelector( this.options.userNicknameTag ).textContent,
+			name:     this.options.defaultUserName,
 			link:     userElement.querySelector( this.options.userLinkTag ).getAttribute( 'href' ),
 		};
+
+		/** If user has name - set */
+		if ( userElement.querySelector( this.options.userNameTag ) ) {
+			output.name = userElement.querySelector( this.options.userNameTag ).textContent;
+		}
 		
 		/** Remove symbols from output */
 		this.options.removeSymbols.forEach( symbol => {
@@ -158,6 +164,7 @@ class YMInstagramParser {
 		this.usersList.forEach( user => {
 			const tags = {
 				'{$username}': user.username,
+				'{$name}':     user.name,
 				'{$link}':     user.link,
 			};
 
@@ -210,8 +217,11 @@ const parser = new YMInstagramParser({
 	usersListScrollBoxTag:     '._aano > div',
 
 	userElementTag:            '[ aria-labelledby ]',
-	userNameTag:               'div > span > a > span > div',
+	userNicknameTag:           'div > span > a > span > div',
+	userNameTag:               '[ aria-labelledby ] > div:nth-child( 2 ) > div:nth-child( 2 )',
 	userLinkTag:               'div > span > a',
+
+	defaultUserName:           'no_name',
 
 	loadingTag:                '._aanq',
 
@@ -220,5 +230,5 @@ const parser = new YMInstagramParser({
 	download:                  true,
 	fileName:                  'users',
 	fileExtension:             '.txt',
-	outputFormat:              `{$username} https://instagram.com{$link}\n`,
+	outputFormat:              `{$username} ({$name}) https://instagram.com{$link}\n`,
 });

@@ -39,9 +39,11 @@ For best use, I recommend to enter the number of users accounts instead of Infin
 | usersListBoxTag | Tag name of users list box element | `string` |
 | usersListScrollBoxTag | Tag name of users list box scroll element | `string` |
 | userElementTag | Tag name of user element | `string` |
+| userNicknameTag | Tag name of username element | `string` |
 | userNameTag | Tag name of user name element | `string` |
 | userLinkTag | Tag name of user link element | `string` |
-| checkLoadingTag | Tag name of loading element | `string` |
+| defaultUserName | Default name if user has no name | `string` |
+| loadingTag | Tag name of loading element | `string` |
 | removeSymbols | Symbols to remove from all output data rows | `array (string)` |
 | download | Is it necessary to download the data to a file | `boolean` |
 | fileName | Name of the file | `string` |
@@ -53,6 +55,7 @@ For best use, I recommend to enter the number of users accounts instead of Infin
 | Tag | Description |
 | --- | --- |
 | `{$username}` | User username |
+| `{$name}` | User name |
 | `{$link}` | User link slug |
 | `\n` | New line |
 

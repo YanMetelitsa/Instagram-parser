@@ -39,9 +39,11 @@
 | usersListBoxTag | Тег элемента блока с подписчиками | `string` |
 | usersListScrollBoxTag | Тег элемента скролла с подписчиками | `string` |
 | userElementTag | Тег элемента подписчика | `string` |
-| userNameTag | Тег элемента с ником подписчика | `string` |
+| userNicknameTag | Тег элемента с ником подписчика | `string` |
+| userNameTag | Тег элемента с именем подписчика | `string` |
 | userLinkTag | Тег элемента с ссылкой подписчика | `string` |
-| checkLoadingTag | Тег элемента значка загрузки | `string` |
+| defaultUserName | Имя по умолчанию если у подписчика не указано имя | `string` |
+| loadingTag | Тег элемента значка загрузки | `string` |
 | removeSymbols | Символы, которые будут удалены из выходных данных | `array (string)` |
 | download | Необходимо ли скачивать файл с данными | `boolean` |
 | fileName | Имя файла | `string` |
@@ -53,6 +55,7 @@
 | Тег | Описание |
 | --- | --- |
 | `{$username}` | Ник подписчика |
+| `{$name}` | Имя подписчика |
 | `{$link}` | Слаг ссылки подписчика |
 | `\n` | Новая строка |
 
